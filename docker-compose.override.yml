@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  microservice:
+    depends_on:
+      - postgres
+    env_file: ./microservice/.env
+    volumes:
+      - ./microservice/:/app/:rw
+
+  postgres:
+    image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_PASSWORD=noterialpwd
+      - POSTGRES_USER=noterialuser
+      - POSTGRES_DB=noterialdb
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./postgres:/postgres
+    networks:
+      - noterial-net

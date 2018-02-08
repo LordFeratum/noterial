@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  microservice:
+    build: ./microservice
+    command: gunicorn src.server:app -c gunicorn_settings.py
+    networks:
+      - noterial-net
+    ports:
+      - 127.0.0.1:5000:5000
+    expose:
+      - 5000
+
+networks:
+  noterial-net: {}
